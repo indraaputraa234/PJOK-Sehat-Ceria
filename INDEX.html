@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="id"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>PJOK Sehat Ceria</title>
+<style>
+:root{--bg:#f4f8ff;--card:#fff;--tx:#14213d;--mut:#5b6b8a;--pri:#ff6b35;--pri2:#ffb703;--ok:#1a9e55;--bad:#d62839;--bd:#dde6f5;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1729;--card:#1a2540;--tx:#eef2ff;--mut:#9fb0d3;--bd:#2c3b60;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0f1729;--card:#1a2540;--tx:#eef2ff;--mut:#9fb0d3;--bd:#2c3b60;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+header{background:linear-gradient(120deg,#ff6b35,#ffb703);color:#fff;padding:18px 16px 14px;text-align:center}
+header h1{margin:0;font-size:1.5rem}header p{margin:2px 0 0;opacity:.95;font-size:.9rem}
+nav{display:flex;gap:6px;overflow-x:auto;padding:10px;position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);z-index:5;border-bottom:1px solid var(--bd)}
+nav button{flex:0 0 auto;border:0;border-radius:99px;padding:9px 16px;background:var(--card);color:var(--tx);font-weight:600;cursor:pointer;border:1px solid var(--bd)}
+nav button.on{background:var(--pri);color:#fff;border-color:var(--pri)}
+main{max-width:900px;margin:0 auto;padding:14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:14px;margin-bottom:12px;box-shadow:0 2px 8px rgba(0,0,0,.05)}
+.tile{cursor:pointer;text-align:center;transition:transform .15s}.tile:hover{transform:translateY(-3px)}
+.hero{height:130px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:3.6rem;margin-bottom:8px}
+.btn{border:0;border-radius:12px;padding:10px 16px;background:var(--pri);color:#fff;font-weight:700;cursor:pointer;font-size:1rem}
+.btn.alt{background:var(--card);color:var(--tx);border:1px solid var(--bd)}.btn.red{background:var(--bad)}
+input,select,textarea{width:100%;padding:10px;border-radius:10px;border:1px solid var(--bd);background:var(--card);color:var(--tx);font:inherit;margin:4px 0 10px}
+label{font-weight:600;font-size:.9rem}
+.opt{display:block;width:100%;text-align:left;padding:12px;margin:7px 0;border-radius:12px;border:2px solid var(--bd);background:var(--card);color:var(--tx);font:inherit;cursor:pointer}
+.opt.sel{border-color:var(--pri);background:rgba(255,107,53,.12)}.opt.ok{border-color:var(--ok);background:rgba(26,158,85,.15)}.opt.no{border-color:var(--bad);background:rgba(214,40,57,.13)}
+.bar{height:8px;background:var(--bd);border-radius:9px;overflow:hidden}.bar i{display:block;height:100%;background:var(--pri)}
+.tag{display:inline-block;padding:2px 10px;border-radius:99px;background:var(--pri2);color:#222;font-size:.78rem;font-weight:700}
+.mut{color:var(--mut);font-size:.88rem}.big{font-size:3rem;font-weight:800;color:var(--pri)}
+table{width:100%;border-collapse:collapse;font-size:.88rem}td,th{padding:6px;border-bottom:1px solid var(--bd);text-align:left}
+.sc{overflow-x:auto}.row{display:flex;gap:8px;flex-wrap:wrap}.row>*{flex:1 1 140px}
+a{color:var(--pri)}
+</style></head><body>
+<header><h1>🏃 PJOK Sehat Ceria</h1><p>Belajar Pendidikan Jasmani, Olahraga &amp; Kesehatan — materi, video, kuis, nilai otomatis</p></header>
+<nav id="nav"></nav><main id="app"></main>
+<script>
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const rnd=(a,b)=>a+Math.floor(Math.random()*(b-a+1));
+const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=rnd(0,i);[a[i],a[j]]=[a[j],a[i]]}return a};
+
+/* ===== MATERI ===== */
+const TOPICS=[
+{id:'atletik',n:'Atletik',e:'🏃',c:'#ff9a5a,#ffd166',v:'teknik lari sprint untuk pemula',
+ p:['Lari jarak pendek (sprint) memakai start jongkok: aba-aba "bersedia", "siap", "ya".','Lompat jauh terdiri dari awalan, tumpuan, melayang, dan mendarat.','Lempar lembing dan tolak peluru melatih kekuatan lengan dan koordinasi.','Pemanasan 5–10 menit wajib dilakukan sebelum berlari agar terhindar dari cedera.']},
+{id:'senam',n:'Senam Lantai',e:'🤸',c:'#c77dff,#ff9ecd',v:'senam lantai guling depan belakang',
+ p:['Guling depan: tubuh membulat, dagu menempel dada, tumpuan tangan di depan.','Guling belakang: duduk jongkok, tangan di samping telinga, dorong dengan tangan.','Sikap lilin melatih kekuatan perut dan keseimbangan.','Kelentukan dilatih dengan peregangan statis 15–30 detik tiap gerakan.']},
+{id:'bola-besar',n:'Bola Besar',e:'⚽',c:'#52b788,#b7e4c7',v:'teknik dasar sepak bola passing dribbling',
+ p:['Sepak bola: passing, dribbling, shooting, dan menyundul bola.','Bola voli: servis bawah, passing bawah, passing atas, smash, dan blok.','Bola basket: dribble, passing dada, dan lay-up.','Sportivitas, kerja sama tim, dan menghargai wasit adalah nilai utama permainan.']},
+{id:'bulutangkis',n:'Bulu Tangkis',e:'🏸',c:'#4cc9f0,#a0e7ff',v:'teknik dasar bulu tangkis pemula',
+ p:['Pegangan raket: forehand (genggam salaman) dan backhand.','Pukulan dasar: servis, lob, dropshot, smash, dan netting.','Lapangan tunggal lebih sempit daripada lapangan ganda.','Footwork yang baik membuat pemain bergerak cepat dan efisien.']},
+{id:'renang',n:'Renang',e:'🏊',c:'#4895ef,#90e0ef',v:'gaya bebas renang untuk pemula',
+ p:['Empat gaya renang: bebas, dada, punggung, dan kupu-kupu.','Latihan mengapung dan pernapasan adalah dasar sebelum berenang.','Selalu berenang di bawah pengawasan dan lakukan pemanasan di darat.','Renang melatih seluruh otot dan sangat baik untuk jantung dan paru-paru.']},
+{id:'kebugaran',n:'Kebugaran &amp; Gizi',e:'💪',c:'#f77f00,#fcbf49',v:'kebugaran jasmani komponen dan gizi seimbang',
+ p:['Komponen kebugaran: daya tahan, kekuatan, kelentukan, kecepatan, keseimbangan, koordinasi.','Gizi seimbang: karbohidrat, protein, lemak, vitamin, mineral, serat, dan air.','Tidur cukup 8–10 jam untuk remaja membantu pemulihan tubuh.','Rumus IMT = berat badan (kg) ÷ tinggi (m)². Normal: 18,5–24,9.']},
+{id:'kesehatan',n:'Hidup Sehat',e:'🩹',c:'#e5383b,#ffb3c1',v:'P3K olahraga cedera RICE',
+ p:['P3K cedera olahraga memakai metode RICE: Rest, Ice, Compression, Elevation.','Cuci tangan pakai sabun mencegah penyakit menular.','Hindari narkoba, rokok, dan minuman keras demi masa depan sehat.','Menjaga kebersihan diri: mandi, gosok gigi, dan pakaian olahraga bersih.']}];
+
+/* ===== BANK SOAL ===== */
+const B=[];const add=(t,q,o,a)=>B.push({id:'b'+B.length,t,q,o,a,src:'bawaan'});
+const FACTS=[
+['atletik','Nomor lari jarak pendek disebut','Sprint'],['atletik','Pada lompat jauh, bagian yang diukur adalah jarak dari papan tumpuan sampai','Bekas pendaratan terdekat'],['atletik','Aba-aba pertama pada start lari jongkok adalah','Bersedia'],['atletik','Alat yang dilempar pada nomor lempar cakram berbentuk','Piringan'],['atletik','Estafet adalah lari yang dilakukan secara','Berantai oleh tim'],['atletik','Tongkat estafet berfungsi untuk','Diserahterimakan antarpelari'],['atletik','Maraton menempuh jarak sekitar','42,195 km'],['atletik','Lompat tinggi menggunakan teknik populer bernama','Fosbury Flop'],
+['senam','Gerakan berguling ke depan dengan tubuh membulat disebut','Guling depan'],['senam','Sikap tubuh bertumpu pada bahu dengan kaki lurus ke atas disebut','Sikap lilin'],['senam','Kemampuan sendi bergerak luas disebut','Kelentukan'],['senam','Senam yang dilakukan di atas matras disebut','Senam lantai'],['senam','Sikap kayang menumpu pada','Kedua tangan dan kaki'],['senam','Peregangan statis sebaiknya ditahan selama','15–30 detik'],
+['bola','Jumlah pemain inti satu tim sepak bola adalah','11 orang'],['bola','Jumlah pemain inti satu tim bola voli di lapangan adalah','6 orang'],['bola','Jumlah pemain inti satu tim bola basket di lapangan adalah','5 orang'],['bola','Pukulan keras bola voli dari atas net disebut','Smash'],['bola','Pelanggaran memegang bola dengan tangan di sepak bola (non kiper) disebut','Handball'],['bola','Gerakan menggiring bola basket disebut','Dribble'],['bola','Lama satu babak sepak bola resmi adalah','45 menit'],
+['bulu','Bola pada bulu tangkis disebut','Shuttlecock'],['bulu','Pukulan jatuh tipis di dekat net disebut','Dropshot'],['bulu','Pukulan tinggi ke belakang lapangan lawan disebut','Lob'],['bulu','Jumlah poin untuk memenangkan satu gim adalah','21 poin'],
+['renang','Gaya renang yang dilakukan telentang adalah','Gaya punggung'],['renang','Gaya renang paling cepat adalah','Gaya bebas'],['renang','Hal pertama sebelum belajar renang adalah mengenal','Air dan mengapung'],
+['sehat','Singkatan RICE pada P3K cedera adalah','Rest, Ice, Compression, Elevation'],['sehat','Zat gizi sumber tenaga utama adalah','Karbohidrat'],['sehat','Zat gizi untuk pertumbuhan dan perbaikan sel adalah','Protein'],['sehat','Zat pengatur tubuh yang banyak ada di buah dan sayur adalah','Vitamin dan mineral'],['sehat','Tujuan pemanasan sebelum olahraga adalah','Mencegah cedera'],['sehat','Pendinginan setelah olahraga bertujuan','Menurunkan denyut jantung secara bertahap'],['sehat','Komponen kebugaran yang diukur dengan lari jarak jauh adalah','Daya tahan'],['sehat','Tidur yang cukup berfungsi untuk','Memulihkan tubuh'],['sehat','Contoh sikap sportif adalah','Menerima kekalahan dengan lapang dada'],['sehat','Mencuci tangan sebaiknya memakai','Air bersih dan sabun'],['sehat','Cedera keseleo pada sendi disebut','Sprain']];
+const TMAP={atletik:'atletik',senam:'senam',bola:'bola-besar',bulu:'bulutangkis',renang:'renang',sehat:'kesehatan'};
+FACTS.forEach(([k,q,a])=>{const pool=FACTS.filter(f=>f[0]===k&&f[2]!==a).map(f=>f[2]);const alt=FACTS.filter(f=>f[2]!==a).map(f=>f[2]);const d=shuf([...new Set(pool.length>=3?pool:pool.concat(alt))]).slice(0,3);const o=shuf([a,...d]);add(TMAP[k],q+' …',o,o.indexOf(a))});
+for(let i=0;i<50;i++){const w=rnd(40,90),h=rnd(145,185),im=+(w/((h/100)**2)).toFixed(1);const k=im<18.5?'Kurus':im<25?'Normal':im<30?'Gemuk':'Obesitas';const o=['Kurus','Normal','Gemuk','Obesitas'];add('kebugaran',`Seorang siswa berat ${w} kg dan tinggi ${h} cm memiliki IMT ${im}. Kategori status gizinya adalah …`,o,o.indexOf(k))}
+for(let i=0;i<50;i++){const u=rnd(12,17),m=220-u;const o=shuf([m,m-10,m+10,m-20]);add('kebugaran',`Denyut nadi maksimal siswa berusia ${u} tahun (rumus 220 − usia) adalah … denyut/menit`,o.map(String),o.indexOf(m))}
+for(let i=0;i<50;i++){const d=[50,60,100,200,400][rnd(0,4)],t=rnd(6,40),v=+(d/t).toFixed(1);const w=[v,+(v+1.5).toFixed(1),+(v*2).toFixed(1),+(v/2).toFixed(1)];const o=shuf(w);add('atletik',`Pelari menempuh ${d} meter dalam ${t} detik. Kecepatan rata-rata (jarak ÷ waktu) adalah … m/detik`,o.map(x=>String(x).replace('.',',')),o.indexOf(v))}
+for(let i=0;i<40;i++){const n=rnd(2,9),s=rnd(15,30),tot=n*s;const o=shuf([tot,tot+s,tot-s,tot+2*s]);add('bola-besar',`Dalam latihan, tiap siswa melakukan ${s} kali passing dan ada ${n} siswa. Total passing seluruh siswa adalah …`,o.map(String),o.indexOf(tot))}
+for(let i=0;i<30;i++){const a=rnd(1,5),b=rnd(1,5),c=rnd(1,5),tot=a+b+c;const o=shuf([tot,tot+1,tot-1,tot+3]);add('renang',`Siswa berenang ${a} putaran gaya bebas, ${b} putaran gaya dada, dan ${c} putaran gaya punggung. Total putaran adalah …`,o.map(String),o.indexOf(tot))}
+B.forEach(x=>x.q=x.q.replace(/\s…\s…$/,' …'));
+
+/* ===== STATE ===== */
+let uid=null,mine=[],tab='materi',db=null,user=null,isTeacher=false,custom=[],results=[],loc=null,cur=null,topicOpen=null,editId=null,theme='';
+const TAB=[['materi','📚 Materi'],['kuis','📝 Kuis'],['nilai','🏆 Nilai'],['guru','🎓 Guru']];
+function bank(t){const all=B.concat(custom);return t==='semua'?all:all.filter(x=>x.t===t)}
+function nav(){$('#nav').innerHTML=TAB.map(([k,l])=>`<button class="${tab===k?'on':''}" onclick="go('${k}')">${l}</button>`).join('')}
+function go(t){tab=t;topicOpen=null;nav();render();scrollTo(0,0)}
+function render(){({materi,kuis,nilai,guru}[tab])()}
+
+/* ===== MATERI ===== */
+function art(t){return `<div class="hero" style="background:linear-gradient(135deg,${t.c})"><span>${t.e}</span></div>`}
+function materi(){
+ if(topicOpen){const t=TOPICS.find(x=>x.id===topicOpen);
+  $('#app').innerHTML=`<button class="btn alt" onclick="topicOpen=null;materi()">← Kembali</button>
+  <div class="card" style="margin-top:10px"><h2>${t.e} ${t.n}</h2>${art(t)}
+  <p class="mut">Gambar ilustrasi materi ${t.n}</p>
+  <h3>Ringkasan materi</h3><ul>${t.p.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>
+  <h3>🎬 Video pembelajaran</h3>
+  <p class="mut">Video dibuka di YouTube pada tab baru (pemutar video tidak dapat ditanam di halaman ini).</p>
+  <a class="btn" style="display:inline-block;text-decoration:none" target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=${encodeURIComponent(t.v)}">▶ Cari video: ${esc(t.n.replace('&amp;','&'))}</a>
+  <div style="margin-top:14px"><button class="btn" onclick="startQuiz('${t.id}')">📝 Latihan soal topik ini (${bank(t.id).length} soal)</button></div></div>`;return}
+ $('#app').innerHTML=`<div class="card"><b>Selamat datang!</b> Pilih materi, lihat gambar dan video, lalu uji dirimu lewat kuis. Bank soal bawaan: <b>${B.length}</b> soal.</div>
+ <div class="grid">${TOPICS.map(t=>`<div class="card tile" onclick="topicOpen='${t.id}';materi();scrollTo(0,0)">${art(t)}<b>${t.n}</b><div class="mut">${bank(t.id).length} soal</div></div>`).join('')}</div>`}
+
+/* ===== KUIS ===== */
+function kuis(){
+ $('#app').innerHTML=`<div class="card"><h2>Mulai Kuis</h2>
+ <label>Nama</label><input id="qn" placeholder="Nama lengkap">
+ <label>Kelas</label><input id="qk" placeholder="Contoh: 7A">
+ <div class="row"><div><label>Topik</label><select id="qt"><option value="semua">Semua topik</option>${TOPICS.map(t=>`<option value="${t.id}">${t.n}</option>`).join('')}</select></div>
+ <div><label>Jumlah soal</label><select id="qc"><option>10</option><option>20</option><option>30</option><option>50</option></select></div></div>
+ <p class="mut" id="lm">📍 Lokasi online akan dicatat saat kamu memulai (butuh izin lokasi).</p>
+ <button class="btn" onclick="startQuiz()">Mulai ▶</button></div>`}
+function getLoc(){return new Promise(r=>{if(!navigator.geolocation)return r(null);navigator.geolocation.getCurrentPosition(p=>r({lat:+p.coords.latitude.toFixed(5),lng:+p.coords.longitude.toFixed(5),acc:Math.round(p.coords.accuracy)}),()=>r(null),{timeout:8000,maximumAge:60000})})}
+async function startQuiz(t){
+ let name=$('#qn')?.value.trim()||cur?.name||'',kelas=$('#qk')?.value.trim()||cur?.kelas||'';
+ if(!name){tab='kuis';nav();kuis();$('#qt').value=t||'semua';alert('Isi nama dulu, lalu tekan Mulai.');return}
+ const topic=t||$('#qt').value,n=+($('#qc')?.value||10);
+ const pool=shuf(bank(topic)).slice(0,n);if(!pool.length){alert('Belum ada soal.');return}
+ $('#app').innerHTML='<div class="card">📍 Mengambil lokasi…</div>';loc=await getLoc();
+ cur={name,kelas,topic,qs:pool,i:0,ans:[],done:false};tab='kuis';nav();quiz()}
+function quiz(){
+ const q=cur.qs[cur.i],sel=cur.ans[cur.i];
+ $('#app').innerHTML=`<div class="card"><div class="row" style="align-items:center"><span class="tag">Soal ${cur.i+1}/${cur.qs.length}</span><span class="mut">${loc?`📍 ${loc.lat}, ${loc.lng}`:'📍 lokasi tidak aktif'}</span></div>
+ <div class="bar" style="margin:10px 0"><i style="width:${cur.i/cur.qs.length*100}%"></i></div>
+ <h3>${esc(q.q)}</h3>${q.o.map((o,i)=>`<button class="opt ${sel===i?'sel':''}" onclick="pick(${i})">${'ABCD'[i]}. ${esc(o)}</button>`).join('')}
+ <div class="row" style="margin-top:8px"><button class="btn alt" ${cur.i?'':'disabled'} onclick="cur.i--;quiz()">← Sebelumnya</button>
+ ${cur.i<cur.qs.length-1?`<button class="btn" onclick="cur.i++;quiz()">Berikutnya →</button>`:`<button class="btn" onclick="finish()">Selesai ✔</button>`}</div></div>`}
+function pick(i){cur.ans[cur.i]=i;quiz()}
+async function finish(){
+ const un=cur.qs.length-cur.ans.filter(x=>x!==undefined).length;
+ if(un&&!confirm(un+' soal belum dijawab. Selesai sekarang?'))return;
+ const ok=cur.qs.filter((q,i)=>cur.ans[i]===q.a).length,score=Math.round(ok/cur.qs.length*100);
+ cur.done=true;cur.score=score;cur.ok=ok;
+ const rec={name:cur.name,kelas:cur.kelas,topic:cur.topic,score,ok,total:cur.qs.length,at:Date.now(),loc:loc||null};
+ results.unshift(rec);
+ try{if(db&&uid){mine.unshift(rec);await db.doc('results/'+uid).set({attempts:mine.slice(0,100)})}}catch(e){console.error(e)}
+ const m=score>=85?'🎉 Luar biasa!':score>=70?'👍 Bagus!':score>=50?'💪 Terus berlatih!':'📖 Pelajari materi lagi ya';
+ $('#app').innerHTML=`<div class="card" style="text-align:center"><div class="mut">${esc(cur.name)} ${esc(cur.kelas)}</div><div class="big">${score}</div><b>${m}</b><p>Benar ${ok} dari ${cur.qs.length} soal</p>
+ <button class="btn" onclick="go('kuis')">Kuis baru</button> <button class="btn alt" onclick="go('nilai')">Lihat nilai</button></div>
+ <h3>Pembahasan</h3>${cur.qs.map((q,i)=>`<div class="card"><b>${i+1}. ${esc(q.q)}</b>${q.o.map((o,j)=>`<div class="opt ${j===q.a?'ok':cur.ans[i]===j?'no':''}">${'ABCD'[j]}. ${esc(o)}</div>`).join('')}</div>`).join('')}`}
+
+/* ===== NILAI ===== */
+const mapL=l=>l?`<a target="_blank" rel="noopener" href="https://www.google.com/maps?q=${l.lat},${l.lng}">📍 ${l.lat}, ${l.lng}</a>`:'–';
+function nilai(){
+ const R=results,avg=R.length?Math.round(R.reduce((s,r)=>s+r.score,0)/R.length):0;
+ const top=R.slice().sort((a,b)=>b.score-a.score).slice(0,5);
+ $('#app').innerHTML=`<div class="grid"><div class="card"><div class="mut">Jumlah pengerjaan</div><div class="big">${R.length}</div></div><div class="card"><div class="mut">Rata-rata nilai</div><div class="big">${avg}</div></div></div>
+ <div class="card"><h3>🥇 Peringkat teratas</h3>${top.length?top.map((r,i)=>`<div>${['🥇','🥈','🥉','4.','5.'][i]} ${esc(r.name)} — <b>${r.score}</b></div>`).join(''):'<span class="mut">Belum ada data.</span>'}</div>
+ ${isTeacher?`<div class="card sc"><h3>Rekap hasil &amp; lokasi (guru)</h3><table><tr><th>Nama</th><th>Kls</th><th>Topik</th><th>Nilai</th><th>Waktu</th><th>Lokasi</th></tr>${R.map(r=>`<tr><td>${esc(r.name)}</td><td>${esc(r.kelas)}</td><td>${esc(r.topic)}</td><td>${r.score}</td><td>${new Date(r.at).toLocaleString('id-ID')}</td><td>${mapL(r.loc)}</td></tr>`).join('')}</table>
+ <p><button class="btn alt" onclick="csv()">⬇ Unduh CSV</button></p></div>`:'<p class="mut">Rekap lengkap dan lokasi hanya terlihat oleh guru.</p>'}`}
+async function csv(){
+ const rows=[['Nama','Kelas','Topik','Nilai','Benar','Total','Waktu','Lat','Lng']].concat(results.map(r=>[r.name,r.kelas,r.topic,r.score,r.ok,r.total,new Date(r.at).toISOString(),r.loc?.lat??'',r.loc?.lng??'']));
+ const data=rows.map(r=>r.map(c=>'"'+String(c).replace(/"/g,'""')+'"').join(',')).join('\n');
+ try{const d=await claude.use('downloads');if(d)await d.save({filename:'nilai-pjok.csv',data})}catch(e){}}
+
+/* ===== GURU ===== */
+function guru(){
+ if(!isTeacher){$('#app').innerHTML='<div class="card"><h3>🎓 Area Guru</h3><p>Menu ini hanya untuk guru (pemilik/editor halaman). Masuk dengan akun guru untuk membuat dan mengedit soal.</p></div>';return}
+ const e=custom.find(x=>x.id===editId)||{t:'atletik',q:'',o:['','','',''],a:0};
+ $('#app').innerHTML=`<div class="card"><h3>${editId?'✏️ Edit soal':'➕ Buat soal baru'}</h3>
+ <label>Topik</label><select id="gt">${TOPICS.map(t=>`<option value="${t.id}" ${e.t===t.id?'selected':''}>${t.n}</option>`).join('')}</select>
+ <label>Pertanyaan</label><textarea id="gq" rows="3">${esc(e.q)}</textarea>
+ ${[0,1,2,3].map(i=>`<label>Pilihan ${'ABCD'[i]}</label><input id="go${i}" value="${esc(e.o[i])}">`).join('')}
+ <label>Jawaban benar</label><select id="ga">${[0,1,2,3].map(i=>`<option value="${i}" ${e.a===i?'selected':''}>${'ABCD'[i]}</option>`).join('')}</select>
+ <button class="btn" onclick="saveQ()">Simpan</button> ${editId?'<button class="btn alt" onclick="editId=null;guru()">Batal</button>':''}</div>
+ <div class="card"><h3>Soal buatan guru (${custom.length})</h3>${custom.map(x=>`<div style="border-bottom:1px solid var(--bd);padding:8px 0"><span class="tag">${x.t}</span> ${esc(x.q)}<div class="row" style="margin-top:6px"><button class="btn alt" onclick="editId='${x.id}';guru();scrollTo(0,0)">Edit</button><button class="btn red" onclick="delQ('${x.id}')">Hapus</button></div></div>`).join('')||'<span class="mut">Belum ada.</span>'}</div>`}
+async function saveQ(){
+ const o=[0,1,2,3].map(i=>$('#go'+i).value.trim()),q=$('#gq').value.trim();
+ if(!q||o.some(x=>!x)){alert('Lengkapi pertanyaan dan 4 pilihan.');return}
+ const id=editId||'c'+Date.now(),d={id,t:$('#gt').value,q,o,a:+$('#ga').value,src:'guru'};
+ try{await db.doc('questions/'+id).set(d);editId=null}catch(e){alert('Gagal menyimpan: '+(e.message||e));return}
+ guru()}
+async function delQ(id){if(!confirm('Hapus soal ini?'))return;try{await db.doc('questions/'+id).delete()}catch(e){alert('Gagal menghapus')}}
+
+/* ===== INIT ===== */
+nav();render();
+(async()=>{
+ try{const u=await claude.use('user');isTeacher=!!(u&&await u.canEdit());uid=u?await u.id():null}catch(e){}
+ try{db=await claude.use('db')}catch(e){}
+ if(db){
+  db.collection('questions').onSnapshot(s=>{custom=s.docs.map(d=>d.data());if(!cur||cur.done)render()},()=>{});
+  if(isTeacher)db.collection('results').onSnapshot(s=>{results=s.docs.flatMap(d=>d.data().attempts||[]).sort((a,b)=>b.at-a.at);if(tab==='nilai')nilai()},()=>{});
+ }
+ nav();render();
+})();
+</script></body></html>
